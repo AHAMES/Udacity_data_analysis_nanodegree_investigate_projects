@@ -1,0 +1,10 @@
+df = pd.read_csv("prosperLoanData.csv")
+del df["ListingKey"] #useless information
+del df["ListingNumber"] #usless information
+del df["ListingCreationDate"] #usless information
+del df["CreditGrade"] #missing too much data
+del df["ClosedDate"] #missing too much data and useless
+df = df.drop(list(df.query("BorrowerAPR == 'NaN'").index)) # deleting 25 records with missing APR
+df = df.drop_duplicates()
+del df['EstimatedEffectiveYield']
+df.info()
